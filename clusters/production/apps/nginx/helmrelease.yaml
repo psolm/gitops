@@ -1,13 +1,16 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: nginx-test
-  namespace: web
+  name: simple-nginx
+  namespace: flux-system
 spec:
-  interval: 10m
   chart:
     spec:
       chart: nginx
+      reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
         name: bitnami
+        namespace: flux-system
+  interval: 5m0s
